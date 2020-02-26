@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Loading.cs" type="Script" id=1]
+
+[sub_resource type="Animation" id=1]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Splash"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/VBox/LoadingText_2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.921569, 0.337255, 0.294118, 1 ), Color( 0.921569, 0.337255, 0.294118, 0.129412 ), Color( 0.921569, 0.337255, 0.294118, 1 ) ]
+}
+
+[node name="Loading" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackGround" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.152941, 0.152941, 0.211765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Body" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="Body"]
+margin_left = 412.0
+margin_top = 265.0
+margin_right = 612.0
+margin_bottom = 335.0
+size_flags_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadingText_1" type="Label" parent="Body/VBox"]
+modulate = Color( 1, 0.709804, 0.439216, 1 )
+margin_right = 200.0
+margin_bottom = 14.0
+text = "Loading"
+align = 1
+valign = 1
+
+[node name="LoadingText_2" type="Label" parent="Body/VBox"]
+modulate = Color( 0.921569, 0.337255, 0.294118, 1 )
+margin_top = 18.0
+margin_right = 200.0
+margin_bottom = 32.0
+text = "please wait"
+align = 1
+valign = 1
+
+[node name="Separator" type="VBoxContainer" parent="Body/VBox"]
+margin_top = 36.0
+margin_right = 200.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 200, 20 )
+
+[node name="Progress" type="ProgressBar" parent="Body/VBox"]
+margin_top = 60.0
+margin_right = 200.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 10 )
+percent_visible = false
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/FadeOut = SubResource( 1 )
+anims/Splash = SubResource( 2 )
+next/FadeOut = "FadeOut"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 872.403
+margin_top = 499.678
+margin_right = 884.403
+margin_bottom = 519.679
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="." method="LoadingStopped"]
